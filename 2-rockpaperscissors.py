@@ -2,7 +2,7 @@ from flask import Flask
 from flask import render_template
 from flask import Response
 from flask import request
-from Iknow2 import Game
+from rockpaperscissors2 import rockpaperscissors2
 
 app = Flask(__name__)
 
@@ -13,8 +13,10 @@ def sms():
     nPhone = request.form["from"]
     sMessage = request.form["body"]
     if nPhone not in dictUsers:
-        dictUsers[nPhone] = Game()
+        dictUsers[nPhone] = rockpaperscissors2()
     aResponse = dictUsers[nPhone].takeTurn(sMessage)
+    if dictUsers[nPhone].isDone():
+        del dictUsers[nPhone]
     sResponse = "<Response>"
     for sLine in aResponse:
         sResponse += "<Message>" + sLine + "</Message>"
