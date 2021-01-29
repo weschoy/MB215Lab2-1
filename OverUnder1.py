@@ -5,7 +5,7 @@ class OverUnder(Game):
     def __init__(self):
         Game.__init__(self)
         self.__nCurrent = -1
-        self.nTurns=0
+        self.nMoves=0
     def takeTurn(self, sInput):
         if(self.__nCurrent == -1):
             self.__nComputer = random.randint(1,100)
@@ -17,7 +17,7 @@ class OverUnder(Game):
         else:
             try:
                 nInput = int(sInput)
-                self.nTurns+=1
+                self.nMoves+=1
                 if nInput > self.__nComputer:
                     return[
                         "Too High",
@@ -32,7 +32,7 @@ class OverUnder(Game):
                     self.isDone(True)
                     return[
                         "Just right",
-                        "Tries taken:",str(self.nTurns)
+                        "Tries taken: "+str(self.nMoves)
                     ]
             except:
                 return[
